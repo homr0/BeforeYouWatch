@@ -3,7 +3,7 @@ import "./style.css";
 
 export const Form = props => {
   return (
-    <form className={(props.size) ? props.size : "s12"} action={props.action} method="POST">
+    <form className={(props.size) ? props.size : "s12"} action={props.action} method={(props.method) ? props.method : ""}>
       {props.children}  
     </form>
   );
