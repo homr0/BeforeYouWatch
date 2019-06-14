@@ -1,10 +1,27 @@
 import React from "react";
 import "./style.css";
 
+export const Form = props => {
+  return (
+    <form className={(props.size) ? props.size : "s12"} action={props.action} method="POST">
+      {props.children}  
+    </form>
+  );
+}
+
+export const Fieldset = props => {
+  return (
+    <fieldset>
+      <legend>{props.name}</legend>
+      {props.children}
+    </fieldset>
+  );
+}
+
 export const Input = props => {
   return (
     <div className={"input-field col " + ((props.size) ? props.size : "s12")}>
-      <input className="validate" id={props.id} type={(props.type) ? props.type : "text"} min={props.min} max={props.max} name={props.name} onChange={props.handleInputChange} />
+      <input className={"validate" + ((props.autocomplete) ? " autocomplete" : "")} id={props.id} type={(props.type) ? props.type : "text"} min={props.min} max={props.max} name={props.name} onChange={props.handleInputChange} />
       <label htmlFor={props.id}>{props.children}</label>
     </div>
   );
