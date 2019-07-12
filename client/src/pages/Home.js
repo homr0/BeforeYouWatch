@@ -31,7 +31,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log(query.title + " " + prev.title);
     if(prev.title !== query.title) {
       setPrev({
         title: query.title
@@ -39,10 +38,12 @@ const Home = () => {
 
       API.movieSearch(query)
       .then(response => {
-        setResults(response.data);
+        setResults({
+          search: response.data
+        });
       });
     }
-    console.log(results);
+    console.log(results.search);
   }, [query, prev.title, results]);
 
   return (
@@ -76,7 +77,7 @@ const Home = () => {
 
           <Row>
             <Col>
-              
+              {(results.search.length > 0) ? results.search.map(movie => <p>{movie.Title}</p>) : <p>No movie results</p>}
             </Col>
           </Row>
         </Col>
