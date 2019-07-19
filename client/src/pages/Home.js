@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { Container, Row, Col } from "../components/Grid";
 import {  Input, Form } from "../components/Form";
+import { MovieList, MovieListItem } from "../components/MovieCard";
 
 const Home = () => {
   const [query, setQuery] = useState({
@@ -43,7 +44,6 @@ const Home = () => {
         });
       });
     }
-    console.log(results.search);
   }, [query, prev.title, results]);
 
   return (
@@ -77,7 +77,14 @@ const Home = () => {
 
           <Row>
             <Col>
-              {(results.search.length > 0) ? results.search.map(movie => <p>{movie.Title}</p>) : <p>No movie results</p>}
+              <MovieList query={query.title}>
+                {(results.search.length > 0) ? results.search.map(movie =>
+                  <MovieListItem
+                    key = {movie.imdbID}
+                    imdb = {movie.imdbID}
+                    title = {movie.Title}
+                    year = {movie.Year} />) : <p>No movie results</p>}
+              </MovieList>
             </Col>
           </Row>
         </Col>
